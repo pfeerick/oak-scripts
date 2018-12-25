@@ -1,0 +1,6 @@
+read -p "Please enter the path of your USB-Serial Adapter (ex: /dev/ttyUSB0):" comport
+read -p "Ensure Oak is attached as shown here and press a key: digistump.com/wiki/oak/serialupdate" -n1 -s
+echo "Updating..."
+python esptool.py --baud 115200 --port $comport write_flash -fs 32m 0x1000 blank.bin 0x2000 firmware_v1.bin 0x101000 blank.bin 0x102000 blank.bin 0x202000 blank.bin 
+echo "Done"
+read -n1 -s
